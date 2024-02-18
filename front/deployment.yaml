@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: energy-usage-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: energy-usage
+  template:
+    metadata:
+      labels:
+        app: energy-usage
+    spec:
+      containers:
+      - name: energy-usage-container
+        image: openaidemoacr.azurecr.io/energy-usage-front:latest
+        ports:
+        - containerPort: 3000
+      imagePullSecrets:
+        - name: energy-usage-secret
